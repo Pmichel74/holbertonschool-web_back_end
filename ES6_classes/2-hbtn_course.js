@@ -1,6 +1,6 @@
 export default class HolbertonCourse {
   constructor(name, length, students) {
-    // Utiliser les setters pour vérifier et assigner les valeurs
+    // Use setters to verify and assign values
     this.name = name;
     this.length = length;
     this.students = students;
@@ -36,7 +36,7 @@ export default class HolbertonCourse {
     if (!Array.isArray(students)) {
       throw new TypeError('Students must be an array of strings');
     }
-    if (!students.every(student => typeof student === 'string')) {
+    if (!students.every((student) => typeof student === 'string')) {
       throw new TypeError('Students must be an array of strings');
     }
     this._students = students;
