@@ -1,0 +1,208 @@
+<svg width="850" height="600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a2a6c;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#b21f1f;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#fdbb2d;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Glow effects -->
+    <filter id="redGlow" height="300%" width="300%" x="-75%" y="-75%">
+      <feMorphology operator="dilate" radius="4" in="SourceAlpha" result="thicken" />
+      <feGaussianBlur in="thicken" stdDeviation="10" result="blurred" />
+      <feFlood flood-color="rgb(255,0,0)" result="glowColor" />
+      <feComposite in="glowColor" in2="blurred" operator="in" result="softGlow" />
+      <feComposite in="softGlow" in2="SourceGraphic" operator="over" />
+    </filter>
+    
+    <filter id="blueGlow" height="300%" width="300%" x="-75%" y="-75%">
+      <feMorphology operator="dilate" radius="3" in="SourceAlpha" result="thicken" />
+      <feGaussianBlur in="thicken" stdDeviation="5" result="blurred" />
+      <feFlood flood-color="rgb(0,150,255)" result="glowColor" />
+      <feComposite in="glowColor" in2="blurred" operator="in" result="softGlow" />
+      <feComposite in="softGlow" in2="SourceGraphic" operator="over" />
+    </filter>
+    
+    <!-- Data packet patterns -->
+    <pattern id="dataPattern" patternUnits="userSpaceOnUse" width="60" height="30">
+      <rect width="60" height="30" fill="#111122" />
+      <text x="30" y="20" font-family="Courier New" font-size="10" fill="#00ff00" text-anchor="middle">DATA</text>
+    </pattern>
+    
+    <pattern id="modifiedDataPattern" patternUnits="userSpaceOnUse" width="60" height="30">
+      <rect width="60" height="30" fill="#221111" />
+      <text x="30" y="20" font-family="Courier New" font-size="10" fill="#ff0000" text-anchor="middle">HACKED</text>
+    </pattern>
+  </defs>
+
+  <!-- Main background -->
+  <rect width="850" height="600" fill="url(#bgGradient)" opacity="0.9" />
+  
+  <!-- Title -->
+  <text x="425" y="60" font-family="Arial, sans-serif" font-size="36" fill="#fff" text-anchor="middle" font-weight="bold">Man-in-the-Middle Attack</text>
+  
+  <!-- Sender (legitimate user) -->
+  <g id="sender" transform="translate(150, 300)">
+    <circle cx="0" cy="0" r="60" fill="#2980b9" stroke="#fff" stroke-width="3" />
+    <circle cx="-20" cy="-10" r="8" fill="#fff" /> <!-- Left eye -->
+    <circle cx="20" cy="-10" r="8" fill="#fff" /> <!-- Right eye -->
+    <path d="M-25,20 C-15,35 15,35 25,20" stroke="#fff" stroke-width="4" fill="none" /> <!-- Smile -->
+    
+    <rect x="-40" y="-80" width="80" height="30" rx="5" fill="#fff" />
+    <text x="0" y="-60" font-family="Arial, sans-serif" font-size="16" fill="#2980b9" text-anchor="middle" font-weight="bold">SENDER</text>
+    
+    <!-- Device -->
+    <g transform="translate(0, 90)">
+      <rect x="-35" y="-20" width="70" height="50" rx="5" fill="#111" stroke="#2980b9" stroke-width="2" />
+      <rect x="-25" y="-15" width="50" height="30" rx="2" fill="#000022" stroke="#444" stroke-width="1" />
+      <circle cx="0" cy="25" r="3" fill="#2980b9" />
+    </g>
+  </g>
+  
+  <!-- Receiver (legitimate user) -->
+  <g id="receiver" transform="translate(700, 300)">
+    <circle cx="0" cy="0" r="60" fill="#27ae60" stroke="#fff" stroke-width="3" />
+    <circle cx="-20" cy="-10" r="8" fill="#fff" /> <!-- Left eye -->
+    <circle cx="20" cy="-10" r="8" fill="#fff" /> <!-- Right eye -->
+    <path d="M-25,20 C-15,35 15,35 25,20" stroke="#fff" stroke-width="4" fill="none" /> <!-- Smile -->
+    
+    <rect x="-40" y="-80" width="80" height="30" rx="5" fill="#fff" />
+    <text x="0" y="-60" font-family="Arial, sans-serif" font-size="16" fill="#27ae60" text-anchor="middle" font-weight="bold">RECEIVER</text>
+    
+    <!-- Device -->
+    <g transform="translate(0, 90)">
+      <rect x="-35" y="-20" width="70" height="50" rx="5" fill="#111" stroke="#27ae60" stroke-width="2" />
+      <rect x="-25" y="-15" width="50" height="30" rx="2" fill="#002200" stroke="#444" stroke-width="1" />
+      <circle cx="0" cy="25" r="3" fill="#27ae60" />
+    </g>
+  </g>
+  
+  <!-- Attacker (Man in the Middle) -->
+  <g id="attacker" transform="translate(425, 300)">
+    <circle cx="0" cy="0" r="70" fill="#c0392b" stroke="#000" stroke-width="3" filter="url(#redGlow)" />
+    <g transform="translate(0, -20)">
+      <!-- Malicious face -->
+      <circle cx="-20" cy="0" r="8" fill="#000" /> <!-- Left eye -->
+      <circle cx="20" cy="0" r="8" fill="#000" /> <!-- Right eye -->
+      <!-- Evil eyebrows -->
+      <path d="M-28,-8 L-12,8" stroke="#000" stroke-width="3" />
+      <path d="M28,-8 L12,8" stroke="#000" stroke-width="3" />
+      <!-- Evil smile -->
+      <path d="M-25,25 C-15,15 15,15 25,25" stroke="#000" stroke-width="4" fill="none" />
+    </g>
+    
+    <rect x="-45" y="-100" width="90" height="35" rx="5" fill="#000" stroke="#c0392b" stroke-width="2" />
+    <text x="0" y="-75" font-family="Arial, sans-serif" font-size="16" fill="#fff" text-anchor="middle" font-weight="bold">ATTACKER</text>
+    
+    <!-- Hacking device -->
+    <g transform="translate(0, 70)">
+      <rect x="-50" y="-30" width="100" height="60" rx="5" fill="#330000" stroke="#c0392b" stroke-width="2" />
+      <rect x="-40" y="-20" width="80" height="40" rx="2" fill="#220000" stroke="#c0392b" stroke-width="1" />
+      
+      <!-- Hacking screen content -->
+      <g font-family="Courier New" font-size="6" fill="#ff0000">
+        <text x="-35" y="-10">$> INTERCEPT()</text>
+        <text x="-35" y="0">$> MONITOR()</text>
+        <text x="-35" y="10">$> MODIFY()</text>
+      </g>
+      
+      <!-- Flashing light -->
+      <circle cx="0" cy="20" r="5" fill="#ff0000">
+        <animate attributeName="opacity" values="1;0.3;1" dur="1s" repeatCount="indefinite" />
+      </circle>
+    </g>
+  </g>
+  
+  <!-- Communication Paths and Data -->
+  <!-- Original intended path (shown as dotted) -->
+  <path d="M220,300 L630,300" stroke="#aaaaaa" stroke-width="3" stroke-dasharray="10,5" />
+  
+  <!-- Actual intercepted paths -->
+  <!-- Path from sender to attacker -->
+  <path d="M220,300 C280,260 320,260 360,300" stroke="#2980b9" stroke-width="3" fill="none" id="pathToAttacker" />
+  
+  <!-- Path from attacker to receiver -->
+  <path d="M490,300 C530,340 570,340 630,300" stroke="#c0392b" stroke-width="3" fill="none" id="pathFromAttacker" />
+  
+  <!-- Data packets from sender to attacker -->
+  <g>
+    <rect width="50" height="25" rx="5" fill="url(#dataPattern)" stroke="#2980b9" stroke-width="2" filter="url(#blueGlow)">
+      <animateMotion dur="3s" repeatCount="indefinite" path="M220,300 C280,260 320,260 360,300" />
+    </rect>
+    <rect width="50" height="25" rx="5" fill="url(#dataPattern)" stroke="#2980b9" stroke-width="2" filter="url(#blueGlow)">
+      <animateMotion dur="3s" begin="1.5s" repeatCount="indefinite" path="M220,300 C280,260 320,260 360,300" />
+    </rect>
+  </g>
+  
+  <!-- Modified data packets from attacker to receiver -->
+  <g>
+    <rect width="50" height="25" rx="5" fill="url(#modifiedDataPattern)" stroke="#c0392b" stroke-width="2" filter="url(#redGlow)">
+      <animateMotion dur="3s" repeatCount="indefinite" path="M490,300 C530,340 570,340 630,300" />
+    </rect>
+    <rect width="50" height="25" rx="5" fill="url(#modifiedDataPattern)" stroke="#c0392b" stroke-width="2" filter="url(#redGlow)">
+      <animateMotion dur="3s" begin="1.5s" repeatCount="indefinite" path="M490,300 C530,340 570,340 630,300" />
+    </rect>
+  </g>
+  
+  <!-- Explanation labels -->
+  <g font-family="Arial, sans-serif" fill="#fff">
+    <!-- Sender's message -->
+    <text x="210" y="250" font-size="14" text-anchor="middle">Sends sensitive data</text>
+    <text x="210" y="270" font-size="14" text-anchor="middle">believing it's secure</text>
+    
+    <!-- Attacker's action -->
+    <text x="425" y="180" font-size="16" text-anchor="middle" font-weight="bold">Intercepts & Manipulates</text>
+    <text x="425" y="200" font-size="14" text-anchor="middle">Reads, modifies or</text>
+    <text x="425" y="220" font-size="14" text-anchor="middle">injects malicious content</text>
+    
+    <!-- Receiver's situation -->
+    <text x="630" y="250" font-size="14" text-anchor="middle">Receives compromised data</text>
+    <text x="630" y="270" font-size="14" text-anchor="middle">unaware of the attack</text>
+  </g>
+  
+  <!-- Animated attack visualization -->
+  <g id="attackIndicators">
+    <!-- Scanning waves around attacker -->
+    <circle cx="425" cy="300" r="100" fill="none" stroke="#c0392b" stroke-width="2" opacity="0.3">
+      <animate attributeName="r" values="80;150;80" dur="4s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.5;0;0.5" dur="4s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="425" cy="300" r="100" fill="none" stroke="#c0392b" stroke-width="2" opacity="0.3">
+      <animate attributeName="r" values="80;150;80" dur="4s" begin="1s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.5;0;0.5" dur="4s" begin="1s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="425" cy="300" r="100" fill="none" stroke="#c0392b" stroke-width="2" opacity="0.3">
+      <animate attributeName="r" values="80;150;80" dur="4s" begin="2s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.5;0;0.5" dur="4s" begin="2s" repeatCount="indefinite" />
+    </circle>
+  </g>
+  
+  <!-- Explanation box at bottom -->
+  <g id="explanationBox">
+    <rect x="50" y="480" width="750" height="100" rx="10" fill="rgba(0,0,0,0.7)" stroke="#fff" stroke-width="1" />
+    <text x="425" y="505" font-family="Arial, sans-serif" font-size="18" fill="#fff" text-anchor="middle" font-weight="bold">How a Man-in-the-Middle Attack Works</text>
+    <text x="80" y="535" font-family="Arial, sans-serif" font-size="14" fill="#fff">1. The attacker positions themselves between two communicating parties</text>
+    <text x="80" y="560" font-family="Arial, sans-serif" font-size="14" fill="#fff">2. All traffic passes through the attacker who can eavesdrop, intercept, and manipulate data</text>
+    <text x="80" y="560" font-family="Arial, sans-serif" font-size="14" fill="#fff">2. All traffic passes through the attacker who can eavesdrop, intercept, and modify data</text>
+    <text x="80" y="560" font-family="Arial, sans-serif" font-size="14" fill="#fff">2. All traffic passes through the attacker who can eavesdrop, intercept, and modify data</text>
+  </g>
+  
+  <!-- Explanation box at bottom -->
+  <g id="explanationBox">
+    <rect x="50" y="480" width="750" height="100" rx="10" fill="rgba(0,0,0,0.7)" stroke="#fff" stroke-width="1" />
+    <text x="425" y="505" font-family="Arial, sans-serif" font-size="18" fill="#fff" text-anchor="middle" font-weight="bold">How a Man-in-the-Middle Attack Works</text>
+    <text x="80" y="535" font-family="Arial, sans-serif" font-size="14" fill="#fff">1. The attacker positions themselves between two communicating parties</text>
+    <text x="80" y="560" font-family="Arial, sans-serif" font-size="14" fill="#fff">2. All traffic passes through the attacker who can eavesdrop, intercept, and modify data</text>
+    <text x="80" y="585" font-family="Arial, sans-serif" font-size="14" fill="#fff">3. Both sender and receiver believe they're communicating directly and securely with each other</text>
+  </g>
+  
+  <!-- Common attack types legend -->
+  <g transform="translate(700, 140)">
+    <rect x="-120" y="-30" width="240" height="80" rx="5" fill="rgba(0,0,0,0.6)" stroke="#aaa" stroke-width="1" />
+    <text x="0" y="-10" font-family="Arial, sans-serif" font-size="14" fill="#fff" text-anchor="middle" font-weight="bold">Common MITM Techniques:</text>
+    <text x="0" y="15" font-family="Arial, sans-serif" font-size="12" fill="#fff" text-anchor="middle">• ARP Spoofing</text>
+    <text x="0" y="35" font-family="Arial, sans-serif" font-size="12" fill="#fff" text-anchor="middle">• DNS Spoofing</text>
+    <text x="0" y="55" font-family="Arial, sans-serif" font-size="12" fill="#fff" text-anchor="middle">• SSL Stripping</text>
+  </g>
+</svg>
