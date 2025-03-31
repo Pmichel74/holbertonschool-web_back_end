@@ -1,4 +1,3 @@
-js
 export default function updateStudentGradeByCity(students, city, newGrades) {
   return students
     .filter((student) => student.location === city)
@@ -6,7 +5,7 @@ export default function updateStudentGradeByCity(students, city, newGrades) {
       const studentGrade = newGrades.find((grade) => grade.studentId === student.id);
       return {
         ...student,
-        grade: studentGrade && studentGrade.grade ? studentGrade.grade : 'N/A',
+        grade: (grade && grade.grade) || 'N/A',
       };
     });
 }
