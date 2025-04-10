@@ -5,78 +5,78 @@
 ![ES6](https://img.shields.io/badge/ES6-2C2D72?style=for-the-badge&logo=javascript&logoColor=white)
 ![Babel](https://img.shields.io/badge/Babel-F9DC3E?style=for-the-badge&logo=babel&logoColor=black)
 
-Ce dépôt contient des projets sur le développement Web backend réalisés dans le cadre de la formation Holberton School.
+This repository contains backend web development projects completed as part of the Holberton School curriculum.
 
-## 📑 Table des matières
+## 📑 Table of Contents
 
 - [Holberton School Web Backend 🚀](#holberton-school-web-backend-)
   - [📝 Description](#-description)
-  - [🧩 Projets](#-projets)
+  - [🧩 Projects](#-projects)
   - [🛠️ Technologies](#️-technologies)
   - [💻 Installation](#-installation)
-  - [🚀 Utilisation](#-utilisation)
-  - [👤 Auteur](#-auteur)
+  - [🚀 Usage](#-usage)
+  - [👤 Author](#-author)
 
 ## 📝 Description
 
-Ce dépôt rassemble différents projets axés sur les technologies web backend, notamment JavaScript ES6 et Node.js. Ces projets explorent les fonctionnalités modernes de JavaScript comme les classes, les promesses, et les méthodes avancées de manipulation de données.
+This repository contains various projects focused on backend web technologies, particularly JavaScript ES6 and Node.js. These projects explore modern JavaScript features such as classes, promises, and advanced data manipulation methods.
 
-## 🧩 Projets
+## 🧩 Projects
 
-| Projet | Description |
+| Project | Description |
 |--------|-------------|
-| [ES6_basic](./ES6_basic/) | Introduction aux fonctionnalités de base d'ES6: arrow functions, template literals, destructuring, etc. |
-| [ES6_classes](./ES6_classes/) | Travail avec les classes ES6, l'héritage et les méthodes statiques. |
-| [ES6_data_manipulation](./ES6_data_manipulation/) | Manipulation avancée des données avec les méthodes ES6 comme map, filter et reduce. |
-| [ES6_promise](./ES6_promise/) | Gestion de l'asynchrone avec les Promises ES6. |
+| [ES6_basic](./ES6_basic/) | Introduction to ES6 basic features: arrow functions, template literals, destructuring, etc. |
+| [ES6_classes](./ES6_classes/) | Working with ES6 classes, inheritance, and static methods. |
+| [ES6_data_manipulation](./ES6_data_manipulation/) | Advanced data manipulation with ES6 methods like map, filter, and reduce. |
+| [ES6_promise](./ES6_promise/) | Handling asynchronous operations with ES6 Promises. |
 
 ## 🛠️ Technologies
 
-Ce dépôt utilise les technologies suivantes :
+This repository uses the following technologies:
 
-- **JavaScript ES6+**: Utilisation des dernières fonctionnalités JavaScript
-- **Node.js**: Environnement d'exécution JavaScript côté serveur
-- **Babel**: Transpilateur pour rendre le code ES6+ compatible avec des environnements plus anciens
-- **ESLint**: Outil de linting pour maintenir la qualité du code
+- **JavaScript ES6+**: Utilizing the latest JavaScript features
+- **Node.js**: Server-side JavaScript runtime environment
+- **Babel**: Transpiler to make ES6+ code compatible with older environments
+- **ESLint**: Linting tool to maintain code quality
 
 ## 💻 Installation
 
-Pour installer et configurer ce projet, suivez ces étapes:
+To install and configure this project, follow these steps:
 
 ```bash
-# Cloner le dépôt
-git clone https://github.com/votre-nom/holbertonschool-web_back_end.git
+# Clone the repository
+git clone https://github.com/your-username/holbertonschool-web_back_end.git
 
-# Se déplacer dans le dossier du projet
+# Navigate to the project folder
 cd holbertonschool-web_back_end
 
-# Installer les dépendances
+# Install dependencies
 npm install
 ```
 
-## 🚀 Utilisation
+## 🚀 Usage
 
-Chaque projet est autonome et possède ses propres instructions d'utilisation. Naviguez dans le dossier du projet spécifique pour plus de détails:
+Each project is self-contained and has its own usage instructions. Navigate to the specific project folder for more details:
 
 ```bash
-# Exemple pour exécuter un script dans ES6_basic
+# Example to run a script in ES6_basic
 npm run dev -- ES6_basic/0-constants.js
 ```
 
-Pour tester les projets:
+To test the projects:
 
 ```bash
-# Exécuter tous les tests
+# Run all tests
 npm test
 
-# Exécuter les tests avec ESLint
+# Run tests with ESLint
 npm run full-test
 ```
 
-## 👤 Auteur
+## 👤 Author
 
 - **Patrick MICHEL** - [GitHub Profile](https://github.com/Pmichel74)
 
 ---
 
-_Ce projet fait partie du curriculum de Holberton School - Développement Web Backend._
+_This project is part of the Holberton School - Web Backend Development curriculum._
