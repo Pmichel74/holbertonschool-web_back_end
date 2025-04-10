@@ -7,13 +7,14 @@
 Ce projet se concentre sur la manipulation de données en JavaScript ES6, utilisant les dernières fonctionnalités comme les méthodes d'array, les typed arrays, les structures de données Set et Map.
 
 ## 📑 Table des matières
-- [Description](#description)
-- [Technologies](#technologies)
-- [Fichiers et Fonctionnalités](#fichiers-et-fonctionnalités)
-- [Installation](#installation)
-- [Utilisation](#utilisation)
-- [Exemples](#exemples)
-- [Auteur](#auteur)
+- [ES6 Data Manipulation 🚀](#es6-data-manipulation-)
+  - [📝 Description](#-description)
+  - [🛠️ Technologies](#️-technologies)
+  - [📂 Fichiers et Fonctionnalités](#-fichiers-et-fonctionnalités)
+  - [💻 Installation](#-installation)
+  - [🚦 Utilisation](#-utilisation)
+  - [📊 Exemples](#-exemples)
+  - [👤 Auteur](#-auteur)
 
 ## 📝 Description
 
