@@ -4,60 +4,60 @@
 ![ES6](https://img.shields.io/badge/ES6-2C2D72?style=for-the-badge&logo=javascript&logoColor=white)
 ![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
 
-Ce projet se concentre sur l'utilisation des Promises en JavaScript ES6, une fonctionnalité puissante pour gérer les opérations asynchrones.
+This project focuses on using Promises in JavaScript ES6, a powerful feature for handling asynchronous operations.
 
-## 📑 Table des matières
+## 📑 Table of Contents
 - [ES6 Promises 🔄](#es6-promises-)
   - [📝 Description](#-description)
   - [🛠️ Technologies](#️-technologies)
-  - [📂 Fichiers et Fonctionnalités](#-fichiers-et-fonctionnalités)
+  - [📂 Files and Features](#-files-and-features)
   - [💻 Installation](#-installation)
-  - [🚦 Utilisation](#-utilisation)
-  - [📊 Exemples](#-exemples)
-  - [👤 Auteur](#-auteur)
+  - [🚦 Usage](#-usage)
+  - [📊 Examples](#-examples)
+  - [👤 Author](#-author)
 
 ## 📝 Description
 
-Ce projet explore l'utilisation des Promises en JavaScript ES6, permettant de gérer efficacement les opérations asynchrones. Les Promises sont un outil essentiel pour éviter le "callback hell" et rendre le code asynchrone plus lisible et maintenable. Le projet couvre la création de Promises, leur chaînage, la gestion des erreurs et l'utilisation de méthodes comme `Promise.all`.
+This project explores the use of Promises in JavaScript ES6, allowing for efficient management of asynchronous operations. Promises are an essential tool for avoiding "callback hell" and making asynchronous code more readable and maintainable. The project covers creating Promises, chaining them, error handling, and using methods like `Promise.all`.
 
 ## 🛠️ Technologies
 
 - JavaScript ES6+
 - Node.js
-- Babel (pour la transpilation)
-- ESLint (pour le linting)
+- Babel (for transpilation)
+- ESLint (for linting)
 
-## 📂 Fichiers et Fonctionnalités
+## 📂 Files and Features
 
-| Fichier | Description |
+| File | Description |
 |---------|-------------|
-| [0-promise.js](./0-promise.js) | Création d'une Promise simple |
-| [1-promise.js](./1-promise.js) | Promise avec résolution conditionnelle |
-| [2-then.js](./2-then.js) | Manipulation des handlers then/catch/finally |
-| [3-all.js](./3-all.js) | Utilisation de Promise.all pour gérer plusieurs promesses |
-| [4-user-promise.js](./4-user-promise.js) | Promise retournant un objet utilisateur |
-| [5-photo-reject.js](./5-photo-reject.js) | Gestion des rejets de Promise |
-| [6-final-user.js](./6-final-user.js) | Combinaison de plusieurs Promises pour des données utilisateur |
-| [7-load_balancer.js](./7-load_balancer.js) | Implémentation d'un équilibreur de charge avec Promise.race |
-| [8-try.js](./8-try.js) | Gestion des erreurs avec les blocs try/catch |
-| [9-try.js](./9-try.js) | Gestion avancée des exceptions |
+| [0-promise.js](./0-promise.js) | Creating a simple Promise |
+| [1-promise.js](./1-promise.js) | Promise with conditional resolution |
+| [2-then.js](./2-then.js) | Manipulating then/catch/finally handlers |
+| [3-all.js](./3-all.js) | Using Promise.all to handle multiple promises |
+| [4-user-promise.js](./4-user-promise.js) | Promise returning a user object |
+| [5-photo-reject.js](./5-photo-reject.js) | Handling Promise rejections |
+| [6-final-user.js](./6-final-user.js) | Combining multiple Promises for user data |
+| [7-load_balancer.js](./7-load_balancer.js) | Implementing a load balancer with Promise.race |
+| [8-try.js](./8-try.js) | Error handling with try/catch blocks |
+| [9-try.js](./9-try.js) | Advanced exception handling |
 
 ## 💻 Installation
 
 ```bash
-# Cloner le dépôt
-git clone https://github.com/votre-nom/holbertonschool-web_back_end.git
+# Clone the repository
+git clone https://github.com/your-name/holbertonschool-web_back_end.git
 
-# Naviguer vers le répertoire du projet
+# Navigate to the project directory
 cd holbertonschool-web_back_end/ES6_promise
 
-# Installer les dépendances
+# Install dependencies
 npm install
 ```
 
-## 🚦 Utilisation
+## 🚦 Usage
 
-Les promesses peuvent être utilisées pour gérer des opérations asynchrones comme les requêtes API, les opérations de fichiers, etc. Voici comment utiliser les fonctions de ce projet:
+Promises can be used to handle asynchronous operations like API requests, file operations, etc. Here's how to use the functions in this project:
 
 ```javascript
 import getResponseFromAPI from './0-promise.js';
@@ -72,9 +72,9 @@ promise
   });
 ```
 
-## 📊 Exemples
+## 📊 Examples
 
-### Exemple 1: Création d'une Promise simple
+### Example 1: Creating a Simple Promise
 
 ```javascript
 import getResponseFromAPI from './0-promise.js';
@@ -83,7 +83,7 @@ const response = getResponseFromAPI();
 console.log(response instanceof Promise); // true
 ```
 
-### Exemple 2: Utilisation de Promise.all
+### Example 2: Using Promise.all
 
 ```javascript
 import uploadPhoto from './utils.js';
@@ -99,7 +99,7 @@ handleProfileSignup()
   });
 ```
 
-### Exemple 3: Gestion des erreurs
+### Example 3: Error Handling
 
 ```javascript
 import handleProfileSignup from './6-final-user.js';
@@ -113,6 +113,6 @@ handleProfileSignup("Bob", "Dylan", "bob_dylan.jpg")
   });
 ```
 
-## 👤 Auteur
+## 👤 Author
 
 - **Patrick MICHEL** - [GitHub Profile](https://github.com/Pmichel74)
