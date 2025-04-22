@@ -99,4 +99,4 @@ print(floor(3.14))  # Output: 3
 
 ## 👨‍💻 Author
 
-- Your Name - [GitHub Profile](https://github.com/your-username)
+- Patrick MICHEL - [GitHub Profile](https://github.com/Pmichel74)
