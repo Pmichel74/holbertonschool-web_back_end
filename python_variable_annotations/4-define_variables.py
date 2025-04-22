@@ -6,6 +6,10 @@
 from typing import List, Tuple
 from math import pi
 
+a: int = 1
+pi: float = 3.14
+i_understand_annotations: bool = True
+school: str = "Holberton"
 
 def define_variables() -> Tuple[int, float, str, List[int],
                                 Tuple[bool, bool], float]:
@@ -14,9 +18,4 @@ def define_variables() -> Tuple[int, float, str, List[int],
         Returns:
             Tuple: tuple of variables
     """
-    a: int = 1
-    pi: float = 3.14
-    i_understand_annotations: bool = True
-    school: str = "Holberton"
-
     return a, pi, i_understand_annotations, school
