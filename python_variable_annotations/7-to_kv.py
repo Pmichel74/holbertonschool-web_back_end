@@ -10,11 +10,11 @@ def to_kv(k: str, v: Union[int, float]) -> Tuple[str, float]:
     """
     Function that takes a string k and an int OR float v as arguments
     and returns a tuple
-    
+
     Args:
         k (str): string key
         v (Union[int, float]): int or float value
-        
+  
     Returns:
         Tuple[str, float]: Tuple containing k and square of v
     """
