@@ -11,6 +11,7 @@ pi: float = 3.14
 i_understand_annotations: bool = True
 school: str = "Holberton"
 
+
 def define_variables() -> Tuple[int, float, str, List[int],
                                 Tuple[bool, bool], float]:
     """
