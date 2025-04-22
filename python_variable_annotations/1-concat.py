@@ -1,4 +1,4 @@
-#!/bin/usr/bin/python3
+#!/bin/usr/bin/env python3
 """
     1-concat.py
     Module has function that returns the concatenation of two strings
