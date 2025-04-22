@@ -14,7 +14,7 @@ def to_kv(k: str, v: Union[int, float]) -> Tuple[str, float]:
     Args:
         k (str): string key
         v (Union[int, float]): int or float value
-  
+
     Returns:
         Tuple[str, float]: Tuple containing k and square of v
     """
