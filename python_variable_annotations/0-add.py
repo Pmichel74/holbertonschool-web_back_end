@@ -1,17 +1,17 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """
-    0-add.py
-    Module has function that return sum of two floats
+    Module has function that returns sum of two floats
 """
 
 
 def add(a: float, b: float) -> float:
+    """Function returns sum of two floats
+
+    Args:
+        a (float): First Float
+        b (float): Second Float
+
+    Returns:
+        float: Sum of a and b
     """
-        Function that returns the sum of two floats
-        Args:
-            a: first float
-            b: second float
-        Returns:
-            sum of a and b
-    """
-    return a + b
+    return a + b*
