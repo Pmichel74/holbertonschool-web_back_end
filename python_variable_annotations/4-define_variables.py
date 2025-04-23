@@ -4,7 +4,6 @@
     Module contains function that returns a list of variables
 """
 from typing import List, Tuple
-from math import pi
 
 a: int = 1
 pi: float = 3.14
@@ -19,4 +18,4 @@ def define_variables() -> Tuple[int, float, str, List[int],
         Returns:
             Tuple: tuple of variables
     """
-    return a, pi, i_understand_annotations, school
+    return a, pi, school, [1, 2, 3], (True, False), pi
