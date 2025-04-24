@@ -7,22 +7,24 @@ Imports:
     typing: code contains type annotations
 """
 import asyncio
-
-# Importation de la fonction wait_random depuis le module précédent
-# Cette méthode d'importation permet de charger dynamiquement un module
-random_wait = __import__('0-basic_async_syntax').wait_random
+import time
+n_wait = __import__('1-concurrent_coroutines').wait_n
 
 
-def task_wait_random(max_delay: int) -> asyncio.Task:
-    """Function returns create_task
+async def measure_time(n: int, max_delay: int) -> float:
+    """Function meausres async function runtime
 
     Args:
-        max_delay (int): max num to delay async function
+        n (int): num of times to run async function
+        max_delay (int): max delay of function
 
     Returns:
-        _type_: asyncio task
+        float: return time
     """
-    # Création d'une tâche asyncio à partir de la coroutine random_wait
-    # Cette tâche peut être ajoutée à une boucle d'événements pour exécution
-    result = asyncio.create_task(random_wait(max_delay))
-    return result
+    start_time = time.perf_counter()
+    asyncio.run(n_wait(n, max_delay))
+    end_time = time.perf_counter()
+
+    elapsed = end_time - start_time
+
+    return elapsed / n
