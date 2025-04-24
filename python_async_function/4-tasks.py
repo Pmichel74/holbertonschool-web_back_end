@@ -23,15 +23,12 @@ async def task_wait_n(n: int, max_delay: int) -> List[float]:
     Returns:
         List[float]: List of task_wait_random results in ascending order
     """
-    # Create a list of tasks using task_wait_random
-    tasks = [task_wait_random(max_delay) for _ in range(n)]
-
-    # Wait for all tasks to complete using asyncio.gather
-    myList: List[float] = await asyncio.gather(*tasks)
+    tasks = [asyncio.create_task(task_wait_random(max_delay)) for _ in range(n)]
+    delays = await asyncio.gather(*tasks)
 
     # Manual bubble sort (as was present in the original 4-tasks.py)
-    for end in range(len(myList), 1, -1):
+    for end in range(len(delays), 1, -1):
         for j in range(1, end):
-            if myList[j - 1] > myList[j]:
-                myList[j - 1], myList[j] = myList[j], myList[j - 1]
-    return myList
+            if delays[j - 1] > delays[j]:
+                delays[j - 1], delays[j] = delays[j], delays[j - 1]
+    return delays
