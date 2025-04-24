@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Module qui contient une fonction pour mesurer le temps d'exécution des coroutines
+"""Module contains function that verifies async runtime
 
 Imports:
-    time: Module pour mesurer le temps d'exécution
-    asyncio: Module pour l'exécution de code asynchrone
-    wait_n: Fonction asynchrone à mesurer
+    1-concurrent_coroutines: async function to verify
+    time: time module to get elapsed time
+    asyncio: async module
 """
 import time
 import asyncio
@@ -12,26 +12,24 @@ n_wait = __import__('1-concurrent_coroutines').wait_n
 
 
 async def measure_time(n: int, max_delay: int) -> float:
-    """Fonction qui mesure le temps total d'exécution de wait_n
+    """Function that measures time of async function
 
     Args:
-        n (int): Nombre de fois pour exécuter la fonction wait_random dans wait_n
-        max_delay (int): Délai maximum pour la fonction wait_random
+        n (int): num of times to run async function
+        max_delay (int): max delay of function
 
     Returns:
-        float: Le temps moyen d'exécution par opération (temps total / n)
+        float: returns time
     """
-    # Enregistrement du temps de début avec haute précision
-    debut = time.perf_counter()
-    
+    # Enregistrement du temps de départ avec grande précision
+    start_time = time.perf_counter()
     # Exécution de la fonction asynchrone wait_n
     await n_wait(n, max_delay)
-    
     # Enregistrement du temps de fin
-    fin = time.perf_counter()
-    
+    end_time = time.perf_counter()
+
     # Calcul du temps total écoulé
-    temps_total = fin - debut
-    
-    # Calcul et retour du temps moyen par opération
-    return temps_total / n
+    elapsed = end_time - start_time
+
+    # Calcul et renvoi du temps moyen par opération
+    return elapsed / n

@@ -8,6 +8,8 @@ Imports:
 """
 import asyncio
 
+# Importation de la fonction wait_random depuis le module précédent
+# Cette méthode d'importation permet de charger dynamiquement un module
 random_wait = __import__('0-basic_async_syntax').wait_random
 
 
@@ -20,5 +22,7 @@ def task_wait_random(max_delay: int) -> asyncio.Task:
     Returns:
         _type_: asyncio task
     """
+    # Création d'une tâche asyncio à partir de la coroutine random_wait
+    # Cette tâche peut être ajoutée à une boucle d'événements pour exécution
     result = asyncio.create_task(random_wait(max_delay))
     return result
