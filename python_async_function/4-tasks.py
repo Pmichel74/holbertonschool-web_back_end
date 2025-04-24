@@ -1,46 +1,38 @@
 #!/usr/bin/env python3
-"""
-Task-based concurrent execution module
+"""Module contains function that takes two integers
 
-Ce module implémente une version task-based de la fonction wait_n.
-Il utilise task_wait_random au lieu de wait_random directement.
-La principale différence est que task_wait_random retourne une tâche asyncio,
-ce qui permet une meilleure gestion des tâches asynchrones.
+Imports:
+    List: module for list type annotation
+    task_wait_random: function that creates and returns an asyncio.Task
 """
 import asyncio
 from typing import List
-# Import de la fonction task_wait_random depuis le module 3-tasks
 task_wait_random = __import__('3-tasks').task_wait_random
 
 
 async def task_wait_n(n: int, max_delay: int) -> List[float]:
-    """
-    Spawns task_wait_random n times with the specified max_delay
-    and returns the list of all the delays in ascending order.
-    
-    Cette fonction est similaire à wait_n mais utilise task_wait_random
-    qui retourne des objets asyncio.Task plutôt que des coroutines directement.
-    
+    """Function takes integers and calls task_wait_random function
+
     Args:
-        n (int): Number of times to spawn task_wait_random
-        max_delay (int): Maximum delay for each task_wait_random call
-        
+        n (int): num of times to call task_wait_random
+        max_delay (int): Num of seconds to delay task_wait_random
+
     Returns:
-        List[float]: List of delays in ascending order by completion time
+        List[float]: List of task_wait_random returns in ascending order
     """
-    # Création d'une liste de n tâches asynchrones
+    # Création d'une liste de tâches asynchrones
     tasks = [task_wait_random(max_delay) for _ in range(n)]
+    # Exécution de toutes les tâches en parallèle et récupération des résultats
+    delays = await asyncio.gather(*tasks)
     
-    # Liste pour stocker les résultats dans l'ordre d'achèvement
-    results = []
+    # Tri manuel de la liste des délais sans utiliser sort()
+    sorted_delays: List[float] = []
+    for delay in delays:
+        # Recherche de la position correcte pour insérer le délai dans la liste triée
+        idx = 0
+        while idx < len(sorted_delays) and delay > sorted_delays[idx]:
+            idx += 1
+        # Insertion du délai à la bonne position
+        sorted_delays.insert(idx, delay)
     
-    # Récupération des résultats dans l'ordre où les tâches se terminent
-    # as_completed permet de récupérer les résultats dès qu'ils sont disponibles
-    for task in asyncio.as_completed(tasks):
-        # Attente du résultat de la tâche
-        delay = await task
-        # Ajout du résultat à la liste
-        results.append(delay)
-        
-    # Retourne les délais dans l'ordre où ils ont été obtenus
-    return results
+    return sorted_delays
