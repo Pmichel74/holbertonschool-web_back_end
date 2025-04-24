@@ -24,7 +24,7 @@ async def wait_n(n: int, max_delay: int) -> List[float]:
     delays = await asyncio.gather(*tasks)
     
     # Manual sorting of the delays list without using sort()
-    sorted_delays = []
+    sorted_delays: List[float] = []
     for delay in delays:
         # Find the correct position to insert the delay
         idx = 0
