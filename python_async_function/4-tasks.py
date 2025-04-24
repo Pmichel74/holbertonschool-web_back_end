@@ -3,7 +3,7 @@
 
 Imports:
     List: module for list type annotation
-    task_wait_random: function that creates and returns an asyncio.Task
+    task_wait_random: function that returns an asyncio.Task
 """
 import asyncio
 from typing import List
@@ -23,16 +23,10 @@ async def task_wait_n(n: int, max_delay: int) -> List[float]:
     # Création d'une liste de tâches asynchrones
     tasks = [task_wait_random(max_delay) for _ in range(n)]
     # Exécution de toutes les tâches en parallèle et récupération des résultats
-    delays = await asyncio.gather(*tasks)
-    
-    # Tri manuel de la liste des délais sans utiliser sort()
-    sorted_delays: List[float] = []
-    for delay in delays:
-        # Recherche de la position correcte pour insérer le délai dans la liste triée
-        idx = 0
-        while idx < len(sorted_delays) and delay > sorted_delays[idx]:
-            idx += 1
-        # Insertion du délai à la bonne position
-        sorted_delays.insert(idx, delay)
-    
-    return sorted_delays
+    results = []
+
+    for task in asyncio.as_completed(tasks):
+        delay = await task
+        results.append(delay)
+
+    return results
