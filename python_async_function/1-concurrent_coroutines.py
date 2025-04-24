@@ -1,34 +1,37 @@
 #!/usr/bin/env python3
-"""Module contains function that takes two integers
+"""Module contient une fonction qui gère plusieurs coroutines asynchrones
 
 Imports:
-    List: module for list type annotation
-    wait_random: function delays for n seconds and returns n
+    List: Module pour l'annotation de type liste
+    wait_random: fonction qui attend pendant un délai aléatoire
 """
+import asyncio
 from typing import List
-random_wait = __import__('0-basic_async_syntax').wait_random
+wait_random = __import__('0-basic_async_syntax').wait_random
 
 
 async def wait_n(n: int, max_delay: int) -> List[float]:
-    """Function takes integers and calls wait_random function
+    """Fonction qui exécute plusieurs coroutines asynchrones en parallèle
 
     Args:
-        n (int): num of times to call wait_random
-        max_delay (int): Num of seconds to delay wait_random
+        n (int): nombre de fois pour exécuter la fonction wait_random
+        max_delay (int): Délai maximum à passer à wait_random
 
     Returns:
-        List[float]: List of wait_random returns
+        List[float]: Liste des délais retournés par wait_random en ordre croissant
     """
-    myList: List[float] = []
-    i: int = 0
-
-    while i < n:
-        result = await random_wait(max_delay)
-        myList.append(result)
-        i += 1
-
-    for end in range(len(myList), 1, -1):
-        for j in range(1, end):
-            if myList[j - 1] > myList[j]:
-                myList[j - 1], myList[j] = myList[j], myList[j - 1]
-    return myList
+    # Création de n tâches asynchrones
+    tasks = [wait_random(max_delay) for _ in range(n)]
+    # Exécution concurrente de toutes les tâches
+    delays = await asyncio.gather(*tasks)
+    
+    # Tri manuel de la liste des délais sans utiliser sort()
+    sorted_delays: List[float] = []
+    for delay in delays:
+        # Trouver la position correcte pour insérer le délai
+        idx = 0
+        while idx < len(sorted_delays) and delay > sorted_delays[idx]:
+            idx += 1
+        sorted_delays.insert(idx, delay)
+    
+    return sorted_delays
