@@ -1,28 +1,38 @@
 #!/usr/bin/env python3
-"""Multiple coroutines"""
+"""Module contains function that takes two integers
+
+Imports:
+    List: module for list type annotation
+    task_wait_random: function that returns an asyncio.Task
+"""
 import asyncio
 from typing import List
+task_wait_random = __import__('3-tasks').task_wait_random
 
 
 async def task_wait_n(n: int, max_delay: int) -> List[float]:
-    """
-    --------------
-    METHOD: wait_n
-    --------------
-    Description:
-        Executes multiple coroutines at
-        the same time with async
+    """Function takes integers and calls task_wait_random function
+
     Args:
-        @n: runs wait_random n number of times
-        @max_delay: specifies the max delay with
-        each run of wait_random
+        n (int): num of times to call task_wait_random
+        max_delay (int): Num of seconds to delay task_wait_random
+
+    Returns:
+        List[float]: List of task_wait_random returns in ascending order
     """
-    task_wait_random = __import__('3-tasks').task_wait_random
-    tasks = [asyncio.create_task(task_wait_random(max_delay)) for _ in range(n)]
+    # Création d'une liste de tâches asynchrones
+    tasks = [task_wait_random(max_delay) for _ in range(n)]
+    # Exécution de toutes les tâches en parallèle et récupération des résultats
     delays = await asyncio.gather(*tasks)
-    # Tri manuel (comme dans wait_n)
-    for end in range(len(delays), 1, -1):
-        for j in range(1, end):
-            if delays[j - 1] > delays[j]:
-                delays[j - 1], delays[j] = delays[j], delays[j - 1]
-    return delays
+    
+    # Tri manuel de la liste des délais sans utiliser sort()
+    sorted_delays: List[float] = []
+    for delay in delays:
+        # Recherche de la position correcte pour insérer le délai dans la liste triée
+        idx = 0
+        while idx < len(sorted_delays) and delay > sorted_delays[idx]:
+            idx += 1
+        # Insertion du délai à la bonne position
+        sorted_delays.insert(idx, delay)
+    
+    return sorted_delays
