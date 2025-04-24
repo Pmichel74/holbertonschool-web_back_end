@@ -5,9 +5,8 @@ Imports:
     List: module for list type annotation
     wait_random: function delays for n seconds and returns n
 """
-import asyncio
 from typing import List
-wait_random = __import__('0-basic_async_syntax').wait_random
+random_wait = __import__('0-basic_async_syntax').wait_random
 
 
 async def wait_n(n: int, max_delay: int) -> List[float]:
@@ -18,18 +17,18 @@ async def wait_n(n: int, max_delay: int) -> List[float]:
         max_delay (int): Num of seconds to delay wait_random
 
     Returns:
-        List[float]: List of wait_random returns in ascending order
+        List[float]: List of wait_random returns
     """
-    tasks = [wait_random(max_delay) for _ in range(n)]
-    delays = await asyncio.gather(*tasks)
-    
-    # Manual sorting of the delays list without using sort()
-    sorted_delays: List[float] = []
-    for delay in delays:
-        # Find the correct position to insert the delay
-        idx = 0
-        while idx < len(sorted_delays) and delay > sorted_delays[idx]:
-            idx += 1
-        sorted_delays.insert(idx, delay)
-    
-    return sorted_delays
+    myList: List[float] = []
+    i: int = 0
+
+    while i < n:
+        result = await random_wait(max_delay)
+        myList.append(result)
+        i += 1
+
+    for end in range(len(myList), 1, -1):
+        for j in range(1, end):
+            if myList[j - 1] > myList[j]:
+                myList[j - 1], myList[j] = myList[j], myList[j - 1]
+    return myList
