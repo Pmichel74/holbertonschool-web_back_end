@@ -3,30 +3,33 @@
 
 Imports:
     typing: module for list type annotation
-    random_wait: function delays for n seconds and returns n
+    asyncio: module for concurrency
+    task_wait_random: function that returns an asyncio.Task
 """
+import asyncio
 from typing import List
-random_wait = __import__('3-tasks').task_wait_random
+# This import assumes '3-tasks' module provides 'task_wait_random'
+# even if the file content shown earlier seemed different.
+task_wait_random = __import__('3-tasks').task_wait_random
 
 
 async def task_wait_n(n: int, max_delay: int) -> List[float]:
-    """Function takes integers and calls wait_random function
+    """Function takes integers and calls task_wait_random function concurrently
 
     Args:
-        n (int): num of times to call wait_random
-        max_delay (int): Num of seconds to delay wait_random
+        n (int): num of times to call task_wait_random
+        max_delay (int): Num of seconds to delay task_wait_random
 
     Returns:
-        List[float]: List of wait_random returns
+        List[float]: List of task_wait_random results in ascending order
     """
-    myList: List[float] = []
-    i: int = 0
+    # Create a list of tasks using task_wait_random
+    tasks = [task_wait_random(max_delay) for _ in range(n)]
 
-    while i < n:
-        result = await random_wait(max_delay)
-        myList.append(result)
-        i += 1
+    # Wait for all tasks to complete using asyncio.gather
+    myList: List[float] = await asyncio.gather(*tasks)
 
+    # Manual bubble sort (as was present in the original 4-tasks.py)
     for end in range(len(myList), 1, -1):
         for j in range(1, end):
             if myList[j - 1] > myList[j]:
