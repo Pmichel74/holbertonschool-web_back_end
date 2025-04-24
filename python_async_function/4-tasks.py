@@ -18,10 +18,11 @@ async def task_wait_n(n: int, max_delay: int) -> List[float]:
         each run of wait_random
     """
     task_wait_random = __import__('3-tasks').task_wait_random
-    delay_list = [task_wait_random(max_delay) for i in range(n)]
-    completed_tasks = []
-
-    for task in asyncio.as_completed(delay_list):
-        completed_tasks.append(await task)
-
-    return completed_tasks
+    tasks = [asyncio.create_task(task_wait_random(max_delay)) for _ in range(n)]
+    delays = await asyncio.gather(*tasks)
+    # Tri manuel (comme dans wait_n)
+    for end in range(len(delays), 1, -1):
+        for j in range(1, end):
+            if delays[j - 1] > delays[j]:
+                delays[j - 1], delays[j] = delays[j], delays[j - 1]
+    return delays
