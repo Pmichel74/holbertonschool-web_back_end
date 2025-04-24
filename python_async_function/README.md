@@ -18,6 +18,7 @@
     - [Asynchronous Tasks](#asynchronous-tasks)
   - [🏃‍♂️ How to Run](#️-how-to-run)
   - [📊 Code Examples](#-code-examples)
+  - [📁 Project Files](#-project-files)
   - [👨‍💻 Author](#-author)
   - [📄 License](#-license)
 
@@ -91,6 +92,18 @@ async def wait_random(max_delay: int = 10) -> float:
 if __name__ == "__main__":
     print(asyncio.run(wait_random(5)))
 ```
+
+## 📁 Project Files
+
+Click on the links below to navigate to each script in the project:
+
+- [0-basic_async_syntax.py](./0-basic_async_syntax.py) - Basic asynchronous function that waits for a random delay
+- [1-concurrent_coroutines.py](./1-concurrent_coroutines.py) - Concurrent execution of multiple coroutines
+- [2-measure_runtime.py](./2-measure_runtime.py) - Measuring execution time of asynchronous functions
+- [2-main.py](./2-main.py) - Test script for measure_runtime
+- [3-tasks.py](./3-tasks.py) - Creating and managing asynchronous tasks
+- [4-tasks.py](./4-tasks.py) - Enhanced version using asyncio tasks
+- [4-main.py](./4-main.py) - Test script for tasks implementation
 
 ## 👨‍💻 Author
 
