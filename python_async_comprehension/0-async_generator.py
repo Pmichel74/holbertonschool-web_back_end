@@ -7,14 +7,14 @@ from typing import AsyncGenerator
 
 async def async_generator() -> AsyncGenerator[float, None]:
     """
-        Generate numbers
+        Generate 10 random numbers asynchronously
 
         Args:
-            void
+            None
 
         Return:
-            float time random
+            AsyncGenerator yielding random float between 0 and 10
     """
-    while True:
+    for _ in range(10):
         await asyncio.sleep(1)
         yield random.uniform(0, 10)
