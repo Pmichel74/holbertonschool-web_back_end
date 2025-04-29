@@ -66,23 +66,22 @@ class Server:
         return csv_list[start:end]
 
     def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict:
-        """Returns a dictionary containing hypermedia pagination information.
-        """
-        assert page > 0
-        assert page_size > 0
-        assert isinstance(page, int)
-        assert isinstance(page_size, int)
+        """Retourne un dictionnaire contenant les informations de pagination hypermedia."""
+        # Vérification des arguments
+        assert isinstance(page, int) and page > 0
+        assert isinstance(page_size, int) and page_size > 0
 
-        csv_list = self.dataset()
-        total_items = len(csv_list)
+        # Récupère la page de données
+        data = self.get_page(page, page_size)
+        # Calcule le nombre total de pages
+        total_items = len(self.dataset())
         total_pages = math.ceil(total_items / page_size)
 
-        start, end = self.index_range(page, page_size)
-        data = csv_list[start:end]
-
+        # Détermine la page suivante et précédente
         next_page = page + 1 if page < total_pages else None
         prev_page = page - 1 if page > 1 else None
 
+        # Retourne le dictionnaire de pagination
         return {
             "page_size": len(data),
             "page": page,
