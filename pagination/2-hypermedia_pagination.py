@@ -8,9 +8,7 @@ Imports:
     csv: csv module
 """
 import csv
-from typing import List
-from typing import Tuple
-from typing import Dict
+from typing import List, Tuple, Dict
 import math
 
 
@@ -52,13 +50,13 @@ class Server:
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
         """Gets specific data
         """
-        assert page > 0
-        assert page_size > 0
         assert isinstance(page, int)
         assert isinstance(page_size, int)
-        myRange = index_range(page, page_size)
-        start = myRange[0]
-        end = myRange[1]
+        assert page > 0
+        assert page_size > 0
+        page_range = index_range(page, page_size)
+        start = page_range[0]
+        end = page_range[1]
         csv_list = self.dataset()
 
         if start >= len(csv_list):
@@ -66,22 +64,30 @@ class Server:
         return csv_list[start:end]
 
     def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict:
-        """Retourne un dictionnaire contenant les informations de pagination hypermedia."""
-        # Vérification des arguments
+        """Returns a dictionary containing
+        hypermedia pagination information.
+        """
         assert isinstance(page, int) and page > 0
         assert isinstance(page_size, int) and page_size > 0
 
-        # Récupère la page de données
         data = self.get_page(page, page_size)
-        # Calcule le nombre total de pages
         total_items = len(self.dataset())
-        total_pages = math.ceil(total_items / page_size)
+        total_pages = (
+            total_items // page_size
+            + (1 if total_items % page_size else 0)
+        )
 
-        # Détermine la page suivante et précédente
-        next_page = page + 1 if page < total_pages else None
-        prev_page = page - 1 if page > 1 else None
+        next_page = (
+            page + 1
+            if (page * page_size) < total_items
+            else None
+        )
+        prev_page = (
+            page - 1
+            if page > 1
+            else None
+        )
 
-        # Retourne le dictionnaire de pagination
         return {
             "page_size": len(data),
             "page": page,
