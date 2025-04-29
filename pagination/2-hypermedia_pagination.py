@@ -1,18 +1,33 @@
 #!/usr/bin/env python3
-""" Hypermedia pagination """
+"""Module contains function that returns pagination range
+Imports:
+    Typing: Type annotation module
+    Tuple: Tuple type annotation
+    List: List type anotaton
+    Dict: Dict type annotation
+    csv: csv module
+"""
 import csv
+from typing import List
+from typing import Tuple
+from typing import Dict
 import math
-from typing import List, Dict, Any
 
 
-def index_range(page, page_size):
-    """ return a tuple of size two containing a start index and an end index
-        corresponding to the range of indexes to return in a list for those
-        particular pagination parameters. """
-    if page and page_size:
-        start_index = (page - 1) * page_size
-        end_index = start_index + page_size
-        return start_index, end_index
+def index_range(page: int, page_size: int) -> Tuple[int, int]:
+    """Function returns pagination range
+
+    Args:
+        page (int): page number
+        page_size (int): page size
+
+    Returns:
+        Tuple[int, int]: start to end range
+    """
+    start = (page - 1) * page_size
+    end = page * page_size
+
+    return ((start, end))
 
 
 class Server:
@@ -35,25 +50,44 @@ class Server:
         return self.__dataset
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
-        """ obtains the indexes and return corresponding pages """
-        assert isinstance(page) == int and page > 0
-        assert isinstance(page_size) == int and page_size > 0
-        start, end = index_range(page, page_size)
-        pages = []
-        if start >= len(self.dataset()):
-            return pages
-        pages = self.dataset()
-        return pages[start:end]
+        """Gets specific data
+        """
+        assert page > 0
+        assert page_size > 0
+        assert isinstance(page, int)
+        assert isinstance(page_size, int)
+        myRange = index_range(page, page_size)
+        start = myRange[0]
+        end = myRange[1]
+        csv_list = self.dataset()
 
-    def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict[str, Any]:
-        """ returns a dictionary """
-        assert isinstance(page) == int and page > 0
-        assert isinstance(page_size) == int and page_size > 0
-        total_pages = math.floor(len(self.dataset()) / page_size)
-        return {'page_size': len(self.get_page(page, page_size)),
-                'page': page,
-                'data': self.get_page(page, page_size),
-                'next_page': page + 1 if page + 1 < total_pages else None,
-                'prev_page': page - 1 if page > 1 else None,
-                'total_pages': total_pages
-                }
+        if start >= len(csv_list):
+            return []
+        return csv_list[start:end]
+
+    def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict:
+        """Returns a dictionary containing hypermedia pagination information.
+        """
+        assert page > 0
+        assert page_size > 0
+        assert isinstance(page, int)
+        assert isinstance(page_size, int)
+
+        csv_list = self.dataset()
+        total_items = len(csv_list)
+        total_pages = math.ceil(total_items / page_size)
+
+        start, end = self.index_range(page, page_size)
+        data = csv_list[start:end]
+
+        next_page = page + 1 if page < total_pages else None
+        prev_page = page - 1 if page > 1 else None
+
+        return {
+            "page_size": len(data),
+            "page": page,
+            "data": data,
+            "next_page": next_page,
+            "prev_page": prev_page,
+            "total_pages": total_pages
+        }
