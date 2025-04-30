@@ -1,87 +1,114 @@
-# 📄✨ Pagination Project
+# 🗂️ Deletion-Resilient Hypermedia Pagination
 
-Welcome to the **Pagination** project! This repository provides scripts and examples for implementing efficient pagination in your web applications.
+[![Python](https://img.shields.io/badge/python-3.7%2B-blue)](https://www.python.org/)
+[![CSV](https://img.shields.io/badge/format-CSV-green)](https://en.wikipedia.org/wiki/Comma-separated_values)
+[![MIT License](https://img.shields.io/badge/license-MIT-yellow)](LICENSE)
 
----
+A robust pagination implementation that handles dataset modifications during pagination operations.
 
-## 🗂️ Table of Contents
-- [📖 Project Overview](#-project-overview)
-- [⚡ Features](#-features)
-- [🛠️ Requirements](#-requirements)
-- [🚀 Installation](#-installation)
-- [🧑‍💻 Usage](#-usage)
-- [📁 File Structure](#-file-structure)
+## 📋 Table of Contents
+- [🔍 Project Overview](#-project-overview)
+- [✨ Features](#-features)
+- [🛠️ Technologies](#-technologies)
+- [📦 Installation](#-installation)
+- [💻 Usage](#-usage)
+- [📚 API Reference](#-api-reference)
+- [📝 Examples](#-examples)
 - [🤝 Contributing](#-contributing)
-- [📝 License](#-license)
-- [🔗 Useful Resources](#-useful-resources)
+- [📄 License](#-license)
 
----
+## 🔍 Project Overview
 
-## 📖 Project Overview
-This project demonstrates how to handle pagination on the server and/or client side to improve navigation and performance when dealing with large datasets. It is designed for educational purposes and can be adapted to various frameworks and languages.
+This Python module implements deletion-resilient hypermedia pagination for a CSV dataset of popular baby names. It provides a consistent paginated interface even when items are removed from the underlying dataset, ensuring that users don't miss data or see duplicates when paginating through changing content.
 
-## ⚡ Features
-- 📃 Split data into pages
-- ⏩ Navigate to next/previous pages
-- 🔢 Select number of items per page
-- 🔍 Search and filter with pagination
-- 🧩 Easy integration with web frameworks (Flask, Django, Express, etc.)
-- 🧪 Example scripts and test data
+## ✨ Features
 
-## 🛠️ Requirements
-- Python 3.x or JavaScript (depending on the implementation)
-- (Optional) Web framework: Flask, Django, Express, etc.
-- pip or npm (for dependency management)
+- ⚡ Resilient pagination using index-based lookup
+- 🚀 Cached CSV dataset for improved performance
+- 🔄 Hypermedia response containing metadata and page data
+- 🛡️ Handles deletions during pagination without breaking
+- 📊 Consistent data retrieval even with changing datasets
 
-## 🚀 Installation
-1. Clone this repository:
-   ```bash
-   git clone https://github.com/your-username/holbertonschool-web_back_end.git
-   ```
-2. Navigate to the pagination folder:
-   ```bash
-   cd holbertonschool-web_back_end/pagination
-   ```
-3. Install dependencies if needed:
-   ```bash
-   pip install -r requirements.txt
-   # or
-   npm install
-   ```
+## 🛠️ Technologies
 
-## 🧑‍💻 Usage
-- Run the main script or start the web server as provided in the examples.
-- Access the web interface or test the pagination API endpoints.
-- Example (Python):
-   ```bash
-   python main.py
-   ```
-- Example (Node.js):
-   ```bash
-   node app.js
-   ```
-- You can customize the number of items per page and use search/filter options as needed.
+- Python 3.7+
+- CSV data processing
+- RESTful API design principles
+- Hypermedia pagination
 
-## 📁 File Structure
+## 📦 Installation
+
+```bash
+# Clone the repository
+git clone <repository-url>
+cd holbertonschool-web_back_end/pagination
+
+# (Optional) Create a virtual environment
+python3 -m venv venv
+source venv/bin/activate
+
+# Install dependencies
+pip install -r requirements.txt
 ```
-pagination/
-├── README.md
-├── main.py / app.js (example entry point)
-├── requirements.txt / package.json
-├── ... (pagination scripts and modules)
+
+## 💻 Usage
+
+```python
+from 3-hypermedia_del_pagination import Server
+
+# Initialize server
+server = Server()
+
+# Fetch a page (starting at index 0, 10 items per page)
+response = server.get_hyper_index(index=0, page_size=10)
+print(response)
+
+# Fetch the next page using the next_index
+next_page = server.get_hyper_index(
+    index=response.get('next_index'),
+    page_size=10
+)
+```
+
+## 📚 API Reference
+
+### `get_hyper_index(index: int, page_size: int) -> dict`
+
+Fetches a page of data with hypermedia pagination that's resilient to deletions.
+
+- **Parameters**:
+  - `index` (int): 0-based start index for pagination.
+  - `page_size` (int): Number of items to return.
+
+- **Returns**: A dictionary with the following keys:
+  - `index`: Original start index.
+  - `next_index`: Index to use for the next page, or `None` if at end.
+  - `page_size`: Number of items returned.
+  - `data`: List of dataset rows (each row is a list of strings).
+
+## 📝 Examples
+
+Run the example script to see the pagination in action:
+
+```bash
+$ python3 3-hypermedia_del_pagination.py
+```
+
+Example output:
+```
+{'index': 0, 'data': [...], 'page_size': 10, 'next_index': 10}
 ```
 
 ## 🤝 Contributing
-Contributions are welcome! Feel free to open issues or submit pull requests to improve the project.
 
-## 📝 License
-This project is licensed for educational purposes. See the LICENSE file for more details if available.
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-## 🔗 Useful Resources
-- [Pagination UX Patterns](https://uxdesign.cc/pagination-ux-patterns-3cf18c1f8f73)
-- [Python Pagination Example](https://realpython.com/flask-paginate/)
-- [MDN - Array.prototype.slice()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice)
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
----
+## 📄 License
 
-> 🚀 A simple and effective way to learn and implement pagination!
+This project is licensed under the MIT License.
