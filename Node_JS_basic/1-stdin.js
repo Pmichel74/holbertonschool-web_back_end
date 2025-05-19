@@ -12,9 +12,11 @@ process.stdin.on('readable', () => {
 
   // Process the input if it exists
   if (chunk) {
+    // Convert Buffer to string if needed and send to stdout
     process.stdout.write(`Your name is: ${chunk}`);
   }
 });
+
 // Handle the end of input stream (happens when input is piped)
 process.stdin.on('end', () => {
   process.stdout.write('This important software is now closing\n');
