@@ -1,12 +1,21 @@
-const std = require('process');
+/**
+ * Interactive program that takes user's name as input and displays it
+ * Handles both direct user input and piped input
+ */
 
-std.stdout.write('Welcome to Holberton School, what is your name?\n');
-std.stdin.on('readable', () => {
-  const name = std.stdin.read();
-  if (name) {
-    std.stdout.write(`Your name is: ${name}`);
+// Display welcome message
+process.stdout.write('Welcome to Holberton School, what is your name?\n');
+
+// Handle incoming data from stdin
+process.stdin.on('readable', () => {
+  const chunk = process.stdin.read();
+
+  // Process the input if it exists
+  if (chunk) {
+    process.stdout.write(`Your name is: ${chunk}`);
   }
 });
-std.stdin.on('end', () => {
-  console.log('This important software is now closing');
+// Handle the end of input stream (happens when input is piped)
+process.stdin.on('end', () => {
+  process.stdout.write('This important software is now closing\n');
 });
