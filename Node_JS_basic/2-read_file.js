@@ -1,5 +1,10 @@
 const fs = require('fs');
 
+/**
+ * Counts students from a CSV database file
+ * @param {string} path - Path to the CSV database file
+ * @throws {Error} - If database cannot be loaded
+ */
 function countStudents(path) {
   try {
     const lines = fs.readFileSync(path, { encoding: 'utf8' }).split(/\r?\n/);
@@ -22,11 +27,11 @@ function countStudents(path) {
         }
       }
     }
-    console.log(`Number of students: ${countStudents}`);
+    console.log('Number of students: ' + countStudents);
     for (const field of Object.keys(fields)) {
       const n = fields[field].countField;
       const names = fields[field].students.join(', ');
-      console.log(`Number of students in ${field}: ${n}. List: ${names}`);
+      console.log('Number of students in ' + field + ': ' + n + '. List: ' + names);
     }
   } catch (err) {
     throw new Error('Cannot load the database');
