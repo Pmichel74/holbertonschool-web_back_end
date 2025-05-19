@@ -1,12 +1,12 @@
-const std = require('process');
+process.stdout.write('Welcome to Holberton School, what is your name?\n');
 
-std.stdout.write('Welcome to Holberton School, what is your name?\n');
-std.stdin.on('readable', () => {
-  const name = std.stdin.read();
+process.stdin.on('readable', () => {
+  const name = process.stdin.read();
   if (name) {
-    std.stdout.write(`Your name is: ${name}`);
+    process.stdout.write(`Your name is: ${name.toString().trim()}\n`);
   }
 });
-std.stdin.on('end', () => {
-  console.log('This important software is now closing\n');
+
+process.stdin.on('end', () => {
+  process.stdout.write('This important software is now closing\n');
 });
