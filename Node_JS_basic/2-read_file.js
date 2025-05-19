@@ -8,6 +8,12 @@ const fs = require('fs');
 function countStudents(path) {
   try {
     const lines = fs.readFileSync(path, { encoding: 'utf8' }).split(/\r?\n/);
+    
+    // Vérifier si le fichier est vide ou ne contient que l'en-tête
+    if (!lines.length || (lines.length === 1 && lines[0].trim() === '')) {
+      throw new Error('Cannot load the database');
+    }
+    
     let countStudents = 0;
     const fields = {};
 
