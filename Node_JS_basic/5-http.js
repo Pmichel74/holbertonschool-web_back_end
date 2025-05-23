@@ -18,7 +18,15 @@ const app = http.createServer((req, res) => {
     const msg = 'This is the list of our students\n';
     countStudents(path)
       .then((students) => {
-        res.end(`${msg}${students.join('\n')}`);
+        let output = '';
+        if (Array.isArray(students)) {
+          output = students.join('\n');
+        } else if (typeof students === 'string') {
+          output = students;
+        } else {
+          output = '';
+        }
+        res.end(`${msg}${output}`);
       })
       .catch((err) => {
         res.end(`${msg}${err.message}`);
