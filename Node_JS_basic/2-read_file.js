@@ -21,6 +21,7 @@ function countStudents(path) {
     // Object to store students by field
     const students = {};
     let totalStudents = 0;
+    const fieldOrder = [];
 
     // Iterate through lines starting from index 1 (skipping header)
     for (let i = 1; i < lines.length; i += 1) {
@@ -32,9 +33,10 @@ function countStudents(path) {
         const firstName = fields[0];
         const field = fields[3];
 
-        // Initialize the array for this field if it doesn't exist
+        // Memorize the order of fields
         if (!students[field]) {
           students[field] = [];
+          fieldOrder.push(field);
         }
 
         // Add the student to the appropriate field
@@ -45,12 +47,9 @@ function countStudents(path) {
     // Display results
     console.log(`Number of students: ${totalStudents}`);
 
-    // Print the number and list of students in each field
-    for (const field in students) {
-      // Check if the property belongs directly to the object, not from prototype chain
-      if (Object.prototype.hasOwnProperty.call(students, field)) {
-        console.log(`Number of students in ${field}: ${students[field].length}. List: ${students[field].join(', ')}`);
-      }
+    // Print the number and list of students in each field in the order of appearance
+    for (const field of fieldOrder) {
+      console.log(`Number of students in ${field}: ${students[field].length}. List: ${students[field].join(', ')}`);
     }
   } catch (err) {
     // If any error occurs, throw a new error with a generic message
