@@ -17,12 +17,6 @@ const app = http.createServer((req, res) => {
   } else if (url === '/students') {
     const msg = 'This is the list of our students\n';
     countStudents(path)
-      .then(() => {
-        // countStudents already logs to console, but we want to capture the output for HTTP response
-        // So, we need to modify 3-read_file_async.js to return the lines instead of logging them
-        // But as per the previous correction, it returns an array of lines
-        return countStudents(path);
-      })
       .then((students) => {
         res.end(`${msg}${students.join('\n')}`);
       })
