@@ -1,8 +1,8 @@
 // Import the express module to create an HTTP server
-const myExpress = require('express');
+const express = require('express');
 
 // Create an Express application instance
-const app = myExpress();
+const app = express();
 
 // Start the server and listen on port 1245
 app.listen(1245, () => {
