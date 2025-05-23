@@ -1,48 +1,54 @@
-// Import the http module to create an HTTP server
 const http = require('http');
-// Import the asynchronous function to count students from a CSV file
 const countStudents = require('./3-read_file_async');
 
-// Create the HTTP server
-const app = http.createServer((req, res) => {
-  // Set the response header to indicate plain text content and status 200 (OK)
-  res.writeHead(200, { 'Content-Type': 'text/plain' });
+const port = 1245;
+const host = 'localhost';
+const dbPath = process.argv[2];
+
+const app = http.createServer(async (req, res) => {
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'text/plain');
+
   const { url } = req;
-  // Get the path to the database file from command line arguments
-  const path = process.argv[2];
-  // If the root URL is requested, respond with a welcome message
+
   if (url === '/') {
     res.end('Hello Holberton School!');
-  // If the /students URL is requested, display the list of students
   } else if (url === '/students') {
-    const msg = 'This is the list of our students\n';
+    res.write('This is the list of our students\n');
+
+    if (!dbPath) {
+      res.end('Cannot load the database');
+      return;
+    }
 
     // Capture console.log output
-    const originalLog = console.log;
-    let output = '';
-    console.log = (text) => {
-      output += `${text}\n`;
+    const originalConsoleLog = console.log;
+    const output = [];
+    
+    console.log = (message) => {
+      output.push(message);
     };
 
-    countStudents(path)
-      .then(() => {
-        // Restore original console.log
-        console.log = originalLog;
-        res.end(`${msg}${output}`);
-      })
-      .catch((err) => {
-        // Restore original console.log
-        console.log = originalLog;
-        res.end(`${msg}${err.message}`);
-      });
+    try {
+      await countStudents(dbPath);
+      
+      // Restore console.log
+      console.log = originalConsoleLog;
+      
+      res.end(output.join('\n'));
+    } catch (error) {
+      // Restore console.log in case of error
+      console.log = originalConsoleLog;
+      res.end(error.message);
+    }
   } else {
-    // For any other URL, respond with Not Found
-    res.end('Not Found');
+    res.statusCode = 404;
+    res.end('Not found');
   }
 });
 
-// Start the server and listen on port 1245
-app.listen(1245);
+app.listen(port, host, () => {
+  console.log(`Server running at http://${host}:${port}/`);
+});
 
-// Export the app for use in other modules (e.g., for testing)
 module.exports = app;
