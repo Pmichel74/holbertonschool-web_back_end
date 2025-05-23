@@ -1,13 +1,13 @@
 
 // Import the file system module to read files
-const fs = require('fs');
+import fs from 'fs';
 
 /**
  * Reads a CSV database file and groups students by their field of study
  * @param {string} path - The path to the CSV file
  * @returns {Promise} - A promise that resolves to an object with fields as keys and arrays of student firstnames as values
  */
-export default function readDatabase(path) {
+const readDatabase = (path) => {
   return new Promise((resolve, reject) => {
     // Read the file asynchronously with UTF-8 encoding
     fs.readFile(path, 'utf8', (err, data) => {
@@ -44,4 +44,6 @@ export default function readDatabase(path) {
       }
     });
   });
-}
+};
+
+export default readDatabase;

@@ -2,7 +2,7 @@
 import router from './routes';
 
 // Import Express framework for creating the web server
-const express = require('express');
+import express from 'express';
 
 // Define the port number on which the server will listen
 const port = 1245;

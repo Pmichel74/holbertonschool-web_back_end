@@ -1,6 +1,6 @@
 
 // Import the readDatabase function from utils to read and process the CSV file
-import { readDatabase } from '../utils';
+import readDatabase from '../utils';
 
 /**
  * Controller class that handles student-related HTTP requests
