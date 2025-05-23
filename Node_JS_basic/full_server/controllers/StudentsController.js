@@ -1,4 +1,3 @@
-
 // Import the readDatabase function from utils to read and process the CSV file
 import readDatabase from '../utils';
 
