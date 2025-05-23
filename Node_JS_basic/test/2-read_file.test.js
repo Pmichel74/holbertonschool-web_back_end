@@ -1,15 +1,15 @@
 const { expect } = require('chai');
 const sinon = require('sinon');
-const countStudents = require('../2-read_file');
 const fs = require('fs');
+const countStudents = require('../2-read_file');
 
 describe('countStudents', () => {
   let consoleSpy;
-  
+
   beforeEach(() => {
     consoleSpy = sinon.spy(console, 'log');
   });
-  
+
   afterEach(() => {
     consoleSpy.restore();
   });

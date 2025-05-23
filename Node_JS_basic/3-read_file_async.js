@@ -2,7 +2,8 @@ const fs = require('fs');
 
 function countStudents(path) {
   return new Promise((resolve, reject) => {
-    fs.readFile(path,
+    fs.readFile(
+      path,
       { encoding: 'utf8', flag: 'r' },
       (err, data) => {
         if (err) {
@@ -54,7 +55,8 @@ function countStudents(path) {
         }
         // Resolve the promise with the response array
         resolve(response);
-      });
+      },
+    );
   });
 }
 

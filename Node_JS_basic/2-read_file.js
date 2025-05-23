@@ -12,16 +12,16 @@ function countStudents(path) {
     const fileContent = fs.readFileSync(path, 'utf-8');
     // Split by lines and remove empty lines
     const lines = fileContent.split('\n').filter((line) => line.trim() !== '');
-    
+
     // Validate the CSV has at least a header and one data row
     if (lines.length <= 1) {
       throw new Error('Cannot load the database');
     }
-    
+
     // Object to store students by field
     const students = {};
     let totalStudents = 0;
-    
+
     // Iterate through lines starting from index 1 (skipping header)
     for (let i = 1; i < lines.length; i += 1) {
       const line = lines[i];
@@ -31,20 +31,20 @@ function countStudents(path) {
         const fields = line.split(',');
         const firstName = fields[0];
         const field = fields[3];
-        
+
         // Initialize the array for this field if it doesn't exist
         if (!students[field]) {
           students[field] = [];
         }
-        
+
         // Add the student to the appropriate field
         students[field].push(firstName);
       }
     }
-    
+
     // Display results
     console.log(`Number of students: ${totalStudents}`);
-    
+
     // Print the number and list of students in each field
     for (const field in students) {
       // Check if the property belongs directly to the object, not from prototype chain

@@ -26,7 +26,7 @@ try {
   // Créons un fichier vide pour tester
   const fs = require('fs');
   fs.writeFileSync('empty.csv', '');
-  
+
   countStudents('empty.csv');
   console.error('✗ Test failed: Function did not throw error for empty file');
 } catch (error) {
