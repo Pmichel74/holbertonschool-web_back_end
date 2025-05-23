@@ -16,18 +16,22 @@ app.get('/students', async (req, res) => {
   res.set('Content-Type', 'text/plain');
   const path = process.argv[2];
   const msg = 'This is the list of our students\n';
+
+  // Capture console.log output
+  const originalLog = console.log;
+  let output = '';
+  console.log = (text) => {
+    output += `${text}\n`;
+  };
+
   try {
-    const students = await countStudents(path);
-    let output = '';
-    if (Array.isArray(students)) {
-      output = students.join('\n');
-    } else if (typeof students === 'string') {
-      output = students;
-    } else {
-      output = '';
-    }
+    await countStudents(path);
+    // Restore original console.log
+    console.log = originalLog;
     res.send(`${msg}${output}`);
   } catch (err) {
+    // Restore original console.log
+    console.log = originalLog;
     res.send(`${msg}${err.message}`);
   }
 });

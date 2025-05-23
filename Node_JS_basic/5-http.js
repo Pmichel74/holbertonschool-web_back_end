@@ -16,19 +16,23 @@ const app = http.createServer((req, res) => {
   // If the /students URL is requested, display the list of students
   } else if (url === '/students') {
     const msg = 'This is the list of our students\n';
+
+    // Capture console.log output
+    const originalLog = console.log;
+    let output = '';
+    console.log = (text) => {
+      output += `${text}\n`;
+    };
+
     countStudents(path)
-      .then((students) => {
-        let output = '';
-        if (Array.isArray(students)) {
-          output = students.join('\n');
-        } else if (typeof students === 'string') {
-          output = students;
-        } else {
-          output = '';
-        }
+      .then(() => {
+        // Restore original console.log
+        console.log = originalLog;
         res.end(`${msg}${output}`);
       })
       .catch((err) => {
+        // Restore original console.log
+        console.log = originalLog;
         res.end(`${msg}${err.message}`);
       });
   } else {
