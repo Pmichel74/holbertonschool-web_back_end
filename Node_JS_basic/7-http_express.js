@@ -1,9 +1,9 @@
 // Import the express module to create an HTTP server
-const MyExpress = require('express');
+const express = require('express');
 const countStudents = require('./3-read_file_async');
 
 // Create an Express application instance
-const app = MyExpress();
+const app = express();
 
 // Define a route for the root URL that sends a welcome message
 app.get('/', (req, res) => {
@@ -16,15 +16,19 @@ app.get('/students', async (req, res) => {
   res.set('Content-Type', 'text/plain');
   const path = process.argv[2];
   const msg = 'This is the list of our students\n';
-  if (path) {
-    try {
-      const students = await countStudents(path);
-      res.send(`${msg}${students.join('\n')}`);
-    } catch (err) {
-      res.send(`${msg}${err.message}`);
+  try {
+    const students = await countStudents(path);
+    let output = '';
+    if (Array.isArray(students)) {
+      output = students.join('\n');
+    } else if (typeof students === 'string') {
+      output = students;
+    } else {
+      output = '';
     }
-  } else {
-    res.send(`${msg}Cannot load the database`);
+    res.send(`${msg}${output}`);
+  } catch (err) {
+    res.send(`${msg}${err.message}`);
   }
 });
 
