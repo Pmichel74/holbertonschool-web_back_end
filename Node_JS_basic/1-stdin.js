@@ -4,7 +4,6 @@ process.stdin.on('readable', () => {
   const chunk = process.stdin.read();
   if (chunk !== null) {
     process.stdout.write(`Your name is: ${chunk}`);
-    process.stdin.end(); // Ferme le flux pour déclencher 'end'
   }
 });
 
