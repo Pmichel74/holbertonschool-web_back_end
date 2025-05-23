@@ -4,7 +4,7 @@ const http = require('http');
 const countStudents = require('./3-read_file_async');
 
 // Create the HTTP server
-const app = http.createServer(async (req, res) => {
+const app = http.createServer((req, res) => {
   // Set the response header to indicate plain text content and status 200 (OK)
   res.writeHead(200, { 'Content-Type': 'text/plain' });
   const { url } = req;
@@ -15,22 +15,23 @@ const app = http.createServer(async (req, res) => {
     res.end('Hello Holberton School!');
   // If the /students URL is requested, display the list of students
   } else if (url === '/students') {
-    if (path !== null) {
-      const msg = 'This is the list of our students\n';
-      try {
-        // Await the result of counting students asynchronously
-        const students = await countStudents(path);
-        // Respond with the summary and the list of students
+    const msg = 'This is the list of our students\n';
+    countStudents(path)
+      .then(() => {
+        // countStudents already logs to console, but we want to capture the output for HTTP response
+        // So, we need to modify 3-read_file_async.js to return the lines instead of logging them
+        // But as per the previous correction, it returns an array of lines
+        return countStudents(path);
+      })
+      .then((students) => {
         res.end(`${msg}${students.join('\n')}`);
-      } catch (err) {
-        // If an error occurs, respond with the error message
+      })
+      .catch((err) => {
         res.end(`${msg}${err.message}`);
-      }
-    }
+      });
   } else {
     // For any other URL, respond with Not Found
-    res.write('Not Found');
-    res.end();
+    res.end('Not Found');
   }
 });
 
